@@ -93,7 +93,7 @@ exports.forgotPassword = async (req, res) => {
 
     const resetLink = `http://localhost:5173/admin-reset/${resetToken}`;
 
-    await transporter.sendMail({
+    await sendEmail({
       to: email,
       subject: "Reset your admin password",
       html: `<a href="${resetLink}">${resetLink}</a>`,

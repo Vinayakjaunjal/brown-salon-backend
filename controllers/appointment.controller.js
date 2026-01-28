@@ -1,6 +1,6 @@
 const Appointment = require("../models/Appointment");
 const Notification = require("../models/Notification");
-const transporter = require("../utils/mailer");
+const sendEmail = require("../utils/sendEmail");
 
 const {
   customerPendingTemplate,
@@ -27,17 +27,15 @@ exports.createAppointment = async (req, res) => {
     });
 
     // CUSTOMER EMAIL
-    await transporter.sendMail({
-      from: `Brown Salon <${process.env.EMAIL_USER}>`,
+    await sendEmail({
       to: appointment.email,
       subject: "Appointment Request Received | Brown Hair Salon",
       html: customerPendingTemplate(appointment),
     });
 
     // ADMIN EMAIL
-    await transporter.sendMail({
-      from: `Brown Salon <${process.env.EMAIL_USER}>`,
-      to: process.env.ADMIN_EMAIL || process.env.EMAIL_USER,
+    await sendEmail({
+      to: appointment.email,
       subject: "New Appointment Request | Action Required",
       html: adminNewAppointmentTemplate(appointment),
     });
@@ -73,8 +71,7 @@ exports.updateAppointmentStatus = async (req, res) => {
     appointment.status = status;
     await appointment.save();
 
-    await transporter.sendMail({
-      from: `Brown Salon <${process.env.EMAIL_USER}>`,
+    await sendEmail({
       to: appointment.email,
       subject: "Appointment Status Update | Brown Hair Salon",
       html: statusUpdateTemplate(appointment, status),

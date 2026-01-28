@@ -1,6 +1,6 @@
 const BirthdayCustomer = require("../models/BirthdayCustomer");
 const Notification = require("../models/Notification");
-const transporter = require("../utils/mailer");
+const sendEmail = require("../utils/sendEmail");
 
 // ================= LOGO =================
 
@@ -142,8 +142,7 @@ exports.sendWish = async (req, res) => {
       return res.status(400).json({ message: "Name and email required" });
     }
 
-    await transporter.sendMail({
-      from: `Brown Hair Salon <${process.env.EMAIL_USER}>`,
+    await sendEmail({
       to: email,
       subject: "🎂 Happy Birthday from Brown Hair Salon!",
       html: birthdayTemplate(name),
