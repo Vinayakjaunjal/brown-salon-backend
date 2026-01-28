@@ -21,15 +21,7 @@ const errorHandler = require("./middleware/errorHandler");
 const app = express();
 
 // MIDDLEWARE
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "https://your-frontend-domain.vercel.app", // or netlify domain
-    ],
-    credentials: true,
-  }),
-);
+app.use(cors());
 
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
