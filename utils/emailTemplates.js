@@ -1,6 +1,16 @@
 const LOGO_URL =
   "https://res.cloudinary.com/dsjypyora/image/upload/v1769510490/brown-circle-logo_bm8nhy.png";
 
+const HEADER = `
+<div style="text-align:center;margin-bottom:20px;">
+  <img 
+    src="${LOGO_URL}" 
+    alt="Brown Hair Salon Logo"
+    style="width:60px;display:inline-block;"
+  />
+</div>
+`;
+
 const FOOTER = `
 <hr style="margin:20px 0;border:none;border-top:1px solid #eee;"/>
 
@@ -15,23 +25,7 @@ You received this email because you booked an appointment with us.
 </p>
 `;
 
-// =======================================================
-// COMMON HEADER (LOGO LEFT + NAME CENTERED PERFECT)
-// =======================================================
-
-const HEADER = `
-<div style="text-align:center;margin-bottom:20px;">
-  <img 
-    src="${LOGO_URL}" 
-    alt="Brown Hair Salon Logo"
-    style="width:60px;display:inline-block;"
-  />
-</div>
-`;
-
-// =======================================================
-// 1️⃣ CUSTOMER - PENDING
-// =======================================================
+// ======= 1️⃣ CUSTOMER - PENDING ======== //
 
 exports.customerPendingTemplate = (data) => `
 <!DOCTYPE html>
@@ -76,9 +70,7 @@ ${FOOTER}
 </html>
 `;
 
-// =======================================================
-// 2️⃣ ADMIN - NEW APPOINTMENT
-// =======================================================
+// ========2️⃣ ADMIN - NEW APPOINTMENT ========= //
 
 exports.adminNewAppointmentTemplate = (data) => `
 <!DOCTYPE html>
@@ -112,9 +104,7 @@ ${FOOTER}
 </html>
 `;
 
-// =======================================================
-// 3️⃣ STATUS UPDATE (APPROVED / REJECTED)
-// =======================================================
+// ========3️⃣ STATUS UPDATE (APPROVED / REJECTED) ======== //
 
 exports.statusUpdateTemplate = (data, status) => `
 <!DOCTYPE html>
@@ -158,9 +148,9 @@ ${FOOTER}
 </html>
 `;
 
-// ======================= BIRTHDAY EMAIL TEMPLATE ================================ //
+// ======== BIRTHDAY EMAIL TEMPLATE ========//
 
-exports.birthdayTemplate = (name) => `
+exports.birthdayTemplate = ({ name }) => `
 <!DOCTYPE html>
 <html>
 <body style="font-family:Arial;background:#f6f4f0;padding:30px;">
@@ -169,32 +159,23 @@ exports.birthdayTemplate = (name) => `
 
 ${HEADER}
 
-  <h2 style="text-align:center;color:#6b3f1d;">
-    🎉 Happy Birthday ${name}!
-  </h2>
+<h3 style="text-align:center;">🎉 Happy Birthday ${name}! 🎂</h3>
 
-  <p>
-    Wishing you a day filled with joy, happiness and great style ✨
-  </p>
+<p>Hello <b>${name}</b>,</p>
 
-  <div style="background:#f1ede7;padding:15px;border-radius:8px;">
-    <p>
-      On your special day, the entire team at 
-      <b>Brown Hair – The Unisex Salon</b> 
-      wishes you success, confidence and beautiful moments 💇‍♂️💇‍♀️
-    </p>
-  </div>
+<p>
+The entire team at <b>Brown Hair – The Unisex Salon</b> wishes you a wonderful birthday filled with happiness and confidence ✨
+</p>
 
-  <p style="margin-top:20px;">
-    🎁 Visit us soon and enjoy your birthday glow!
-  </p>
+<div style="background:#f1ede7;padding:15px;border-radius:8px;">
+<p>
+🎁 As a birthday treat, we invite you to visit us soon and enjoy our premium salon services.
+</p>
+</div>
 
-  <p>
-    Warm wishes,<br/>
-    <b>Team Brown Hair Salon</b>
-  </p>
+<p>Warm wishes,<br/><b>Team Brown Hair Salon</b></p>
 
-  ${FOOTER}
+${FOOTER}
 
 </div>
 </body>

@@ -1,27 +1,7 @@
 const BirthdayCustomer = require("../models/BirthdayCustomer");
 const Notification = require("../models/Notification");
 const sendEmail = require("../utils/sendEmail");
-
-// ================= LOGO =================
-
-const LOGO_URL =
-  "https://res.cloudinary.com/dsjypyora/image/upload/v1769510490/brown-circle-logo_bm8nhy.png";
-
-// ================= FOOTER =================
-
-const FOOTER = `
-<hr style="margin:20px 0;border:none;border-top:1px solid #eee;"/>
-
-<p style="font-size:13px;color:#555;">
-📞 +91-XXXXXXXXXX <br/>
-🌐 www.brownhairsalon.com <br/>
-📍 Brown Hair The Unisex Salon, India
-</p>
-
-<p style="font-size:12px;color:#999;">
-You received this email from Brown Hair Salon.
-</p>
-`;
+const { birthdayTemplate } = require("../utils/emailTemplates");
 
 // ================= ADD CUSTOMER =================
 
@@ -100,7 +80,7 @@ exports.sendWish = async (req, res) => {
     await sendEmail({
       to: email,
       subject: "🎂 Happy Birthday from Brown Hair Salon!",
-      html: birthdayTemplate(name),
+      html: birthdayTemplate({ name }),
     });
 
     res.json({ success: true });
