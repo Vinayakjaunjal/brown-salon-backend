@@ -21,13 +21,7 @@ const errorHandler = require("./middleware/errorHandler");
 const app = express();
 
 // MIDDLEWARE
-app.use(
-  cors({
-    origin: "*", // allow all (safe for now)
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  }),
-);
+app.use(cors());
 
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
